@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macros %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}
+    {{ super() }}
+    Bienvenido
+{% endblock %}
+
+{% block content %}
+
+        <div class="row gy-4">
+            <h1 >Bienvenido {{ username }}</h1>
+            <div class="col-4">
+
+                    <h2>Crea una nueva tarea</h2>
+                    {{ render_form(todo_form) }}
+
+            </div>
+            <div class="col-8">
+
+                    <div class="container gy-5 px-0">
+                            <h2 class="row justify-content-center">Lista de tareas</h2>
+                            {% if not todos %}
+                                <p class="text row justify-content-center text-secondary">No hay tareas para mostrar</p>
+                            {% endif %}
+                            <ul class="list-group border-0 shadow">
+                                {% for todo in todos %}
+                                    {{ macros.render_todo(todo, delete_form) }}
+                                {% endfor %}
+                            </ul>
+
+
+                    </div>
+
+            </div>
+        </div>
+
+
+{% endblock %}
+
+

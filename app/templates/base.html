@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+            {% block styles %}
+                <!-- Bootstrap CSS -->
+                {{ bootstrap.load_css() }}
+            {% endblock %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+            <title>{% block title %}
+                Flask Api |
+                {% endblock %}
+            </title>
+        {% endblock %}
+    </head>
+
+    <body class="container-fluid">
+        <!-- Your page content -->
+        <header>
+            {% block navbar %}
+                {% include 'navbar.html' %}
+            {% endblock navbar %}
+        </header>
+        <div class="container-fluid">
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% block content %}
+            {% endblock %}
+        </div>
+        {% block scripts %}
+            <!-- Optional JavaScript -->
+            {{ bootstrap.load_js() }}
+        {% endblock %}
+    </body>
+</html>
